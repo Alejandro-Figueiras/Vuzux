@@ -1,0 +1,60 @@
+:root {
+    --fallback-title-bar-height: 40px;
+}
+
+.draggable {
+    app-region: drag;
+    /* Pre-fix app-region during standardization process */
+    -webkit-app-region: drag;
+}
+
+.nonDraggable {
+    app-region: no-drag;
+    /* Pre-fix app-region during standardization process */
+    -webkit-app-region: no-drag;
+}
+
+body {
+    margin: 0;
+}
+
+#navbar-init {
+    top: env(titlebar-area-y, 0);
+    height: 40px;
+    width: 100%;
+    background-color:#101214 !important
+}
+
+#navbar-container {
+    position: absolute;
+    top: 0;
+    display: flex;
+    user-select: none;
+    height: 100%;
+    left: env(titlebar-area-x, 0);
+    width: env(titlebar-area-width, 100%);
+
+    color: #FFFFFF;
+    text-align: center;
+}
+
+
+
+nav .navbar-brand {
+    margin: auto;
+    padding: 0px 16px 0px 16px;
+    font-size: medium;
+    color: #FFFFFF;
+}
+
+main {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 40px;
+}
+
+.navbar-nav .nav-link {
+    font-size: 14px;
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/reproductor.css">
+    <link rel="manifest" href="manifiesto.webmanifest">
+</head>
+<body class="text-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand fixed-top navbar-dark bg-dark" id="navbar-init" aria-label="Eighth navbar example">
+        <div class="container draggable" id="navbar-container">
+            <a class="navbar-brand" href="#" id="brandname">Vuzux Player</a>
+
+            <div class="collapse navbar-collapse" id="navbarsExample07"><ul class="navbar-nav me-auto"></ul></div>
+        </div>
+    </nav>
+
+    <!-- Main -->
+    <main id="mainContent">
+        <div class="reproductor">
+			<video class="video w-100 h-100" id="video" src="./black.mp4"></video>
+
+			<div class="interfaz" id="interfaz">
+
+				<div class="labelSuperior" id="labelSuperior">
+					<span id="labelName" class="w-auto"></span>
+				</div>
+				<div class="controles">
+					<div class="progressbar">
+						<span id="duracionActual">00:00:00</span>
+						<input type="range" class="form-range progreso" min="0" max="0" value="50" id="progress-bar">
+						<span id="duracionTotal">00:00:00</span>
+					</div>
+					<div class="row">
+						<div class="col botonera botonera-central">
+							<a href="#"><img id="btn-restart" class="btn-generico delay" src="reproductor/restart.png" alt="restart"></a>
+							<a href="#"><img class="btn-generico" src="reproductor/prev.png" alt="prev"></a>
+							<a href="#"><img class="btn-generico" src="reproductor/next-video.png" alt="next-video"></a>
+                            <a href="#"><img id="btn-fullscreen" class="btn-generico espaciado-izquierda" src="reproductor/fullscreen.png" alt="fullscreen"></a>
+							<a href="#"><img id="btn-retroceder" class="btn-generico" src="reproductor/rewind.png" alt="rewind"></a>
+							<a href="#"><img id="btn-play" class="btn-generico btn-play" src="reproductor/play.png" alt="play"></a>
+							<a href="#"><img id="btn-adelantar" class="btn-generico" src="reproductor/next.png" alt="fast"></a>
+							<a href="#"><img id="btn-volumen" class="btn-generico btn-volumen" src="reproductor/volumen-2.png" alt="volumen"></a>
+							<input type="range" id="volumenBar" class="form-range volumen" min="0" max="100" value="100">	
+						</div>
+					</div>
+				</div>
+
+			</div>
+			
+        </div>
+    </main>
+    <div id="elementos-static"></div>
+    <div id="elementos-hidden" class="d-none; visually-hidden"></div>
+
+	<script src="jquery.js"></script>
+    <script src="bootstrap/bootstrap.bundle.js"></script>
+    <script src="repro.js"></script>
+</body>
+</html>

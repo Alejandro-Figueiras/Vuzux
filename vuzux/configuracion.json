@@ -1,0 +1,26 @@
+{
+    "archivos":{
+        "path": {
+            "ruta": "path",
+            "nombre": "", 
+            "ext": "",
+            "width": 0,
+            "height": 0,
+            "duracion": 0,
+            "size": 0,
+            "thumbnail": "thumbnailPath",
+            "vistoUltimaVez": 0,
+            "ultimoVolumen": 1
+        }
+    },
+    "directorios": {
+        "path": {
+            "path":"",
+            "videos": ["path","path","path"],
+            "subdirectorios": {
+                "path":"",
+                "videos":["path","path","path"]
+            }
+        }
+    }
+}

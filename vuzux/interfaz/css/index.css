@@ -1,0 +1,77 @@
+img {
+    overflow: hidden;
+}
+
+/* flex que no esta en bootstrap */
+@media (min-width: 1200px) {
+    .row-cols-xl-7 > * {
+        flex: 0 0 auto;
+        width: 14.28571428571429%;
+    }
+}
+
+.card {
+    color: #ffffff;
+    width: 100%;
+    height: 100%;
+}
+
+.card-custom-1 {
+    background-clip: border-box;
+    border: 0;
+    margin-bottom: 1rem;
+}
+
+.card-custom-1 .card-body {
+    flex: 1 1 auto;
+    padding: 0.1rem;
+    max-height: 4.5rem;
+    overflow: hidden;
+    text-align: justify;
+}
+
+.card-custom-1 .card-recortar {
+    font-size: 0.95rem;
+    max-height: 4rem;
+    overflow: hidden;
+    display: block;
+    -webkit-line-clamp: 2;
+    display: box;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
+.card-custom-1 .card-info {
+    font-size: 0.85rem;
+}
+
+.card-custom-2 .card-body {
+    flex: 1 1 auto;
+    padding: 0.1rem;
+    max-height: 5.5rem;
+    overflow: hidden;
+    text-align: justify;
+}
+
+.card-custom-2 .card-recortar {
+    font-size: 0.95rem;
+    max-height: 4rem;
+    overflow: hidden;
+    display: block;
+    -webkit-line-clamp: 3;
+    display: box;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
+.card-recortar-peli {
+    -webkit-line-clamp: 3;
+}
+
+.card-custom-2 .card-info {
+    font-size: 0.85rem;
+}

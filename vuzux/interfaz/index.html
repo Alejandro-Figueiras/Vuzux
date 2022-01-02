@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vuzux</title>
+    <link rel="stylesheet" href="bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="manifest" href="manifiesto.webmanifest">
+</head>
+<body class="bg-dark">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand fixed-top navbar-dark bg-dark" id="navbar-init" aria-label="Eighth navbar example">
+        <div class="container draggable" id="navbar-container">
+            <a class="navbar-brand" href="#">Vuzux</a>
+
+            <div class="collapse navbar-collapse" id="navbarsExample07">
+                <ul class="navbar-nav  me-auto nonDraggable">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="nav-carpetas">Carpetas</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="#" id="nav_series">Series</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="nav_peliculas">Peliculas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="nav-favoritos">Favoritos</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="nav-ajustes">Ajustes</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main -->
+    <main class="pt-3" id="mainContent">
+        <div class="m-0 row justify-content-center align-items-center" style="height: 100% !important;">
+            <div class="col">
+                <img src="img/cargando.gif" width="40px" height="40px" class="d-block m-auto align-content-center">
+                <p class="text-light mt-2" style="font-size: 18px; text-align: center;">Cargando...<br/>
+                    Si es tu primera vez o haz agregado muchos videos recientemente<br/>esto puede demorar algunos minutos. Ten paciencia</p>
+            </div>
+        </div>
+    </main>
+    <div id="elementos-static"></div>
+    <div id="elementos-hidden" class="d-none; visually-hidden"></div>
+
+	<script src="jquery.js"></script>
+    <script src="bootstrap/bootstrap.bundle.js"></script>
+    <script src="Plantillas.js"></script>
+    <script src="interfaz_index.js"></script>
+</body>
+</html>
