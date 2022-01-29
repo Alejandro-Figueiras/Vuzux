@@ -265,27 +265,40 @@ const uuid = require("uuid").v4;
         for (let dir of Object.values(configDatos.directorios)) {
             let uuidPath = uuid();
             pathsUUID[uuidPath] = {uuid: uuidPath, path: dir.path, obj: dir};
-            body.innerHTML += `<tr id="${uuidPath}"><td>${dir.path}</td><td style="text-align: right; max-width: 70px;"><a href="#" class="text-danger text-decoration-none">Eliminar</a></td></tr>`
+            body.innerHTML += `<tr id="${uuidPath}"><td>${dir.path}</td><td style="text-align: right; max-width: 70px;"><a href="#" class="btn-eliminar-ruta text-danger text-decoration-none">Eliminar</a></td></tr>`
         }
         body.addEventListener("click", e => {
+            if (e.target.classList.contains("btn-eliminar-ruta")) {
+                let pathEliminar = pathsUUID[e.target.parentElement.parentElement.id].path;
+                ipcRenderer.send("eliminarPath", {path:pathEliminar});
+                document.getElementById(e.target.parentElement.parentElement.id).remove();
+            }
             // vistaCarpeta(pathsUUID[e.target.parentElement.id].obj)
         })
 
         document.getElementById("agregar-ruta").addEventListener("click", e => {
             ipcRenderer.send("agregar-carpeta", {});
-            ipcRenderer.on("agregar-carpetas:finished", (e, datos) => {
-                console.log("respuesta yeeeee");
-                configDatos = datos;
-                const body = document.getElementById(`tabla${"rutas"}Body`);
-                body.innerHTML = "";
-                for (let dir of Object.values(configDatos.directorios)) {
-                    let uuidPath = uuid();
-                    pathsUUID[uuidPath] = {uuid: uuidPath, path: dir.path, obj: dir};
-                    body.innerHTML += `<tr id="${uuidPath}"><td>${dir.path}</td><td style="text-align: right; max-width: 70px;"><a href="#" class="text-danger text-decoration-none">Eliminar</a></td></tr>`
-                }
-            })
+            
         })
     }
+    ipcRenderer.on("agregar-carpeta:cargando", (e, datos) => {
+        cargando = true;
+        let html = `<div class="m-0 row justify-content-center align-items-center" style="height: 100% !important;">
+            <div class="col">
+                <img src="img/cargando.gif" width="40px" height="40px" class="d-block m-auto align-content-center">
+                <p class="text-light mt-2" style="font-size: 18px; text-align: center;">Cargando...<br/>
+                    Obteniendo informacion y generando miniaturas<br/>Esto puede demorar algunos minutos. Ten paciencia</p>
+            </div>
+        </div>`;
+        mainContent.innerHTML = html;
+    })
+    ipcRenderer.on("agregar-carpetas:finished", (e, datos) => {
+        cargando = false;
+        configDatos = datos;
+        vistaAjustes();
+    })
+    
+    /* -------- Nav ------- */
 
     document.getElementById("nav-carpetas").addEventListener("click", e => {if (!cargando) cambiarVista(2)});
     // document.getElementById("nav_peliculas").addEventListener("click", e => cambiarVista(5));

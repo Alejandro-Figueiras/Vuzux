@@ -48,7 +48,7 @@ module.exports = class Reproductor {
 
         ipcMain.on("repro:updateInfo", async(e, datos) => {
             if (Configuracion.datos.archivos[datos.ruta] == undefined) await CargadorInformacion.getVideoTemplate(datos.ruta);
-            if (Configuracion.datos.archivos[datos.ruta].visto | 0 < datos.visto) Configuracion.datos.archivos[datos.ruta].visto = datos.visto; // TODO no funciona
+            if (Configuracion.datos.archivos[datos.ruta].visto | 0 < datos.visto) Configuracion.datos.archivos[datos.ruta].visto = datos.visto;
             Configuracion.datos.archivos[datos.ruta].ultimoVolumen = datos.ultimoVolumen;
             Configuracion.datos.archivos[datos.ruta].vistoUltimaVez = datos.vistoUltimaVez;
             console.log("Actualizado");

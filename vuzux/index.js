@@ -117,6 +117,7 @@ const instanciarVentanaInicial = () => {
 
     ipcMain.on("agregar-carpeta", async(e, obj) => {
         let dir = await Explorador.agregarCarpeta(ventanaInicial);
+        ventanaInicial.webContents.send("agregar-carpeta:cargando", {});
         const partes = dir[0].split("\\");
         let path = "";
         for (let i = 0; i < partes.length; i++) {
@@ -137,6 +138,14 @@ const instanciarVentanaInicial = () => {
             actualizarCarpetas();
         })
 
+    })
+
+    ipcMain.on("eliminarPath", async(e, obj) => {
+        delete Configuracion.datos.directorios[obj.path];
+        Configuracion.guardarCambios();
+        ventanaInicial.webContents.send("respuesta:finished", {
+            datos: Configuracion.datos
+        });
     })
     
 }
