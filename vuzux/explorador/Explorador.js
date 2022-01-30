@@ -48,7 +48,6 @@ module.exports = class Explorador {
             }
         } catch (e) {}
 
-        console.log(ruta, videos, directorios);
         return {videos, directorios};
     }
 

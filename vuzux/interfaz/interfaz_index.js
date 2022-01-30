@@ -81,7 +81,6 @@ const uuid = require("uuid").v4;
         global.outerHTML = Plantillas.getTablaUnidad("main");
         const body = document.getElementById(`tabla${"main"}Body`);
 
-        console.log(configDatos);
         for (let dir of Object.values(configDatos.directorios)) {
             if (dir.videos.length!=0) {
                 let uuidPath = uuid();
@@ -134,7 +133,6 @@ const uuid = require("uuid").v4;
                 let uuidPath = uuid();
                 pathsUUID[uuidPath] = video;
                 htmlRow.innerHTML += Plantillas.getVistaVideo(uuidPath, configDatos.archivos[video]);
-                console.log(video, ":",configDatos.archivos[video].visto);
 
                 if ((configDatos.archivos[video].visto |0) != 0) {
                     let image = new Image();
@@ -218,6 +216,8 @@ const uuid = require("uuid").v4;
             e.target.outerHTML = ""; // bai bai
         })
     }
+
+    /* -------- Peliculas ------- */
 
     const vistaPeliculas = () => {
         let html = `<div class="container-fluid" id="mainContainer">

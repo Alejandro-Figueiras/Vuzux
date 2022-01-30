@@ -23,7 +23,6 @@ const actualizarCarpetas = async() => {
     return new Promise(async(resolve, reject) => {
         for (let directorio of Object.values(Configuracion.datos.directorios)) {
             for (let video of directorio.videos) {
-                console.log(video);
                 let stat = fs.statSync(video);
                 if (Configuracion.datos.archivos[video] == undefined || Configuracion.datos.archivos[video].size != stat.size || !fs.existsSync(Configuracion.datos.archivos[video].thumbnail)) {
                     try {
@@ -195,8 +194,6 @@ if (!singleLock) {
             if (i != 0) ruta += "/";
             ruta += partesRuta[i];
         }
-        console.log("Abriendo: "+ruta);
-        console.log(Configuracion.datos.archivos[ruta]);
         try {
             let template = Configuracion.datos.archivos[ruta];
             if (template == undefined) {
@@ -216,7 +213,6 @@ if (!singleLock) {
                     return;
                 }
                 template = await CargadorInformacion.getVideoTemplate(ruta).catch(err => console.log(err));
-                console.log(template);
             }
             reproducir(template);
         } catch (e) {
