@@ -66,6 +66,7 @@ module.exports = class Explorador {
     
                     if (!status.isDirectory()) {
                         let ext = path.extname(rutaFile);
+                        // EXTENSIONES (revisar el otro lugar donde estan las extensiones)
                         if (!(ext == ".mp4" || ext == ".mkv"|| ext == ".avi" || ext == ".mpg" || ext == ".m4v" || ext == ".flv")) continue;
                         videos.push(rutaFile);
                     }

@@ -3,7 +3,7 @@ const path = require('path');
 
 module.exports = class CargarConfiguracion {
     
-    static ruta = process.env['USERPROFILE']+path.sep+((process.env.NODE_ENV != "production")?".vuzux-dev":".vuzux")+path.sep;
+    static ruta = ""; // Inicializacion en el index
     static verificar() {
         if(!fs.existsSync(this.ruta)) {
             fs.mkdirSync(this.ruta);

@@ -6,8 +6,10 @@ const Explorador = require("./explorador/Explorador");
 const fs = require("fs");
 const CargadorInformacion = require("./explorador/CargadorInformacion");
 const Reproductor = require("./Reproductor");
+const CargarConfiguracion = require("./configuracion/CargadorConfiguracion");
 
 let ventanaInicial, reproductor;
+CargarConfiguracion.ruta = process.env['USERPROFILE']+path.sep+((!app.isPackaged)?".vuzux-dev":".vuzux")+path.sep
 Configuracion.iniciar();
 
 const iniciar = async() => {
@@ -151,6 +153,7 @@ const instanciarVentanaInicial = () => {
 }
 
 const reproducir = (template) => {
+    console.log("A reproducir");
     if (reproductor == null) reproductor = new Reproductor(template, () => {
         ventanaInicial.webContents.send("respuesta:finished", {
             datos: Configuracion.datos
@@ -166,11 +169,59 @@ if (!singleLock) {
     app.quit();
 } else {
     app.on("second-instance", (event, argv) => {
-        console.log("segunda bkn");
+        console.log("segunda bkn", argv);
+        if (argv.length >= ((app.isPackaged)?3:4)) {
+            if (path.isAbsolute((app.isPackaged)?argv[2]:argv[3])) {
+                abrirRuta((app.isPackaged)?argv[2]:argv[3]);
+            }
+        }
     })
 
     // lo normal
-    app.on("ready", () => {
+    app.on("ready", (e, info) => {
         instanciarVentanaInicial();
+
+        if (process.argv.length >= ((app.isPackaged)?2:3)) {
+            if (path.isAbsolute((app.isPackaged)?process.argv[1]:process.argv[2])) {
+                abrirRuta((app.isPackaged)?process.argv[1]:process.argv[2]);
+            }
+        }
     })
+
+    const abrirRuta = async(ruta) => {
+        partesRuta = ruta.split("\\");
+        ruta = "";
+        for (let i = 0; i < partesRuta.length; i++) {
+            if (i != 0) ruta += "/";
+            ruta += partesRuta[i];
+        }
+        console.log("Abriendo: "+ruta);
+        console.log(Configuracion.datos.archivos[ruta]);
+        try {
+            let template = Configuracion.datos.archivos[ruta];
+            if (template == undefined) {
+                let status = fs.statSync(ruta);
+
+                if (!status.isDirectory()) {
+                    let ext = path.extname(ruta);
+                    // EXTENSIONES (revisar el otro lugar donde estan las extensiones)
+                    if (!(ext == ".mp4" || ext == ".mkv"|| ext == ".avi" || ext == ".mpg" || ext == ".m4v" || ext == ".flv")) {
+                        console.log("El archivo no tiene un formato soportado");
+                        return;
+                    } else {
+                        console.log("Por aqui bien");
+                    }
+                } else {
+                    console.log("El archivo abierto es un directorio");
+                    return;
+                }
+                template = await CargadorInformacion.getVideoTemplate(ruta).catch(err => console.log(err));
+                console.log(template);
+            }
+            reproducir(template);
+        } catch (e) {
+            console.log("Error en el sync");
+            return;
+        }
+    }
 }
