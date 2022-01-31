@@ -3,8 +3,8 @@ const { ipcRenderer } = require("electron");
 (() => {
     /* Label superior */ 
     let labelFormat = function(w, d) {
-        var fit = d.getElementById("labelSuperior");
-        var wrap = d.getElementById("labelName");
+        const fit = d.getElementById("labelSuperior");
+        const wrap = d.getElementById("labelName");
         fontFitResize(fit, wrap);
     
         
@@ -61,13 +61,13 @@ const { ipcRenderer } = require("electron");
     let informacion = {};
     let tieneHoras = false;
     const iconos = {
-        play: "reproductor/play.png",
-        pausa: "reproductor/pausa.png",
-        fullscreen: "reproductor/fullscreen.png",
-        windowed: "reproductor/windowed.png",
-        vol0: "reproductor/volumen-0.png",
-        vol1: "reproductor/volumen-1.png",
-        vol2: "reproductor/volumen-2.png"
+        play: "icons/play.png",
+        pausa: "icons/pausa.png",
+        fullscreen: "icons/fullscreen.png",
+        windowed: "icons/windowed.png",
+        vol0: "icons/volumen-0.png",
+        vol1: "icons/volumen-1.png",
+        vol2: "icons/volumen-2.png"
     }
     const btnPlay = document.getElementById("btn-play");
     const btnRetroceder = document.getElementById("btn-retroceder");
@@ -299,7 +299,6 @@ const { ipcRenderer } = require("electron");
         actualizarInformacion(false);
         console.log("closed");
         btnPlay.src = iconos.play;
-        video.src = "./black.mp4";
         video.load();
     })
 

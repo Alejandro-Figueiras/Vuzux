@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="libs/bootstrap.css">
-    <link rel="stylesheet" href="css/navbar.css">
-    <link rel="stylesheet" href="css/reproductor.css">
+    <link rel="stylesheet" href="../libs/bootstrap.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="reproductor.css">
     <link rel="manifest" href="manifiesto.webmanifest">
 </head>
 <body class="text-light">
@@ -22,7 +22,7 @@
     <!-- Main -->
     <main id="mainContent">
         <div class="reproductor">
-			<video class="video w-100 h-100" id="video" src="./black.mp4"></video>
+			<video class="video w-100 h-100" id="video" src="./../black.mp4"></video>
 
 			<div class="interfaz" id="interfaz">
 
@@ -37,14 +37,14 @@
 					</div>
 					<div class="row">
 						<div class="col botonera botonera-central">
-							<a href="#"><img id="btn-restart" class="btn-generico delay" src="reproductor/restart.png" alt="restart"></a>
-							<a href="#"><img class="btn-generico" src="reproductor/prev.png" alt="prev"></a>
-							<a href="#"><img class="btn-generico" src="reproductor/next-video.png" alt="next-video"></a>
-                            <a href="#"><img id="btn-fullscreen" class="btn-generico espaciado-izquierda" src="reproductor/fullscreen.png" alt="fullscreen"></a>
-							<a href="#"><img id="btn-retroceder" class="btn-generico" src="reproductor/rewind.png" alt="rewind"></a>
-							<a href="#"><img id="btn-play" class="btn-generico btn-play" src="reproductor/play.png" alt="play"></a>
-							<a href="#"><img id="btn-adelantar" class="btn-generico" src="reproductor/next.png" alt="fast"></a>
-							<a href="#"><img id="btn-volumen" class="btn-generico btn-volumen" src="reproductor/volumen-2.png" alt="volumen"></a>
+							<a href="#"><img id="btn-restart" class="btn-generico delay" src="icons/restart.png" alt="restart"></a>
+							<a href="#"><img class="btn-generico" src="icons/prev.png" alt="prev"></a>
+							<a href="#"><img class="btn-generico" src="icons/next-video.png" alt="next-video"></a>
+                            <a href="#"><img id="btn-fullscreen" class="btn-generico espaciado-izquierda" src="icons/fullscreen.png" alt="fullscreen"></a>
+							<a href="#"><img id="btn-retroceder" class="btn-generico" src="icons/rewind.png" alt="rewind"></a>
+							<a href="#"><img id="btn-play" class="btn-generico btn-play" src="icons/play.png" alt="play"></a>
+							<a href="#"><img id="btn-adelantar" class="btn-generico" src="icons/next.png" alt="fast"></a>
+							<a href="#"><img id="btn-volumen" class="btn-generico btn-volumen" src="icons/volumen-2.png" alt="volumen"></a>
 							<input type="range" id="volumenBar" class="form-range volumen" min="0" max="100" value="100">	
 						</div>
 					</div>
@@ -57,8 +57,8 @@
     <div id="elementos-static"></div>
     <div id="elementos-hidden" class="d-none; visually-hidden"></div>
 
-	<script src="libs/jquery.js"></script>
-    <script src="libs/bootstrap.bundle.js"></script>
+	<script src="../libs/jquery.js"></script>
+    <script src="../libs/bootstrap.bundle.js"></script>
     <script src="repro.js"></script>
 </body>
 </html>

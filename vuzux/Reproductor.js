@@ -7,7 +7,7 @@ const CargadorInformacion = require("./explorador/CargadorInformacion");
 
 module.exports = class Reproductor {
 
-    constructor(template = {ruta: 0, nombre: 0, ext: 0, width: 0, height: 0, duracion: 0, visto: 0, size: 0, thumbnail: 0}, cb) {
+    constructor(template = {ruta: "", nombre: 0, ext: 0, width: 0, height: 0, duracion: 0, visto: 0, size: 0, thumbnail: 0}, cb) {
         this.ventana = new BrowserWindow({
             webPreferences: {
                 nodeIntegration: true,
@@ -30,7 +30,7 @@ module.exports = class Reproductor {
         this.ventana.toggleDevTools();
 
         this.ventana.loadURL(url.format({
-            pathname: path.join(__dirname + "/interfaz/reproductor.html"),
+            pathname: path.join(__dirname + "/interfaz/reproductor/reproductor.html"),
             protocol: "file",
             slashes: true,
         }));
@@ -50,7 +50,7 @@ module.exports = class Reproductor {
 
         ipcMain.on("repro:updateInfo", async(e, datos) => {
             if (Configuracion.datos.archivos[datos.ruta] == undefined) await CargadorInformacion.getVideoTemplate(datos.ruta);
-            if (Configuracion.datos.archivos[datos.ruta].visto | 0 < datos.visto) Configuracion.datos.archivos[datos.ruta].visto = datos.visto;
+            if ((Configuracion.datos.archivos[datos.ruta].visto | 0) < datos.visto) Configuracion.datos.archivos[datos.ruta].visto = datos.visto;
             Configuracion.datos.archivos[datos.ruta].ultimoVolumen = datos.ultimoVolumen;
             Configuracion.datos.archivos[datos.ruta].vistoUltimaVez = datos.vistoUltimaVez;
             console.log("Actualizado");
