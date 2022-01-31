@@ -1,4 +1,4 @@
-const ruta = require("../configuracion/CargadorConfiguracion").ruta;
+const CC = require("../configuracion/CargadorConfiguracion");
 const uuid = require("uuid").v4;
 const fs = require("fs");
 const genThumbnail = require('simple-thumbnail');
@@ -11,8 +11,8 @@ module.exports = class Thumbnails {
         return new Promise((resolve, reject) => {
             try {
                 const id = uuid();
-                let salida = ruta + "thumbnails/" + id + "_uncrop.png";
-                let salidaFinal = ruta + "thumbnails/" + id + ".png";
+                let salida = CC.ruta + "thumbnails/" + id + "_uncrop.png";
+                let salidaFinal = CC.ruta + "thumbnails/" + id + ".png";
                 let duracionCustom = 0
                 if (duracion < 45) duracionCustom = parseInt(duracion/10);
                 if (duracionCustom > 45) duracionCustom = 42;

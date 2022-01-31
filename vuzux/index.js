@@ -9,8 +9,6 @@ const Reproductor = require("./Reproductor");
 const CargarConfiguracion = require("./configuracion/CargadorConfiguracion");
 
 let ventanaInicial, reproductor;
-CargarConfiguracion.ruta = process.env['USERPROFILE']+path.sep+((!app.isPackaged)?".vuzux-dev":".vuzux")+path.sep
-Configuracion.iniciar();
 
 const iniciar = async() => {
     await Explorador.explorarPersonalizados();
@@ -169,6 +167,8 @@ if (!singleLock) {
 } else {
     app.on("second-instance", (event, argv) => {
         console.log("segunda bkn", argv);
+        ventanaInicial.show();
+        ventanaInicial.focus();
         if (argv.length >= ((app.isPackaged)?3:4)) {
             if (path.isAbsolute((app.isPackaged)?argv[2]:argv[3])) {
                 abrirRuta((app.isPackaged)?argv[2]:argv[3]);
@@ -178,8 +178,11 @@ if (!singleLock) {
 
     // lo normal
     app.on("ready", (e, info) => {
+        CargarConfiguracion.ruta = process.env['USERPROFILE']+path.sep+((!app.isPackaged)?".vuzux-dev":".vuzux")+path.sep
+        Configuracion.iniciar();
         instanciarVentanaInicial();
 
+        Configuracion.datos.argv = process.argv;
         if (process.argv.length >= ((app.isPackaged)?2:3)) {
             if (path.isAbsolute((app.isPackaged)?process.argv[1]:process.argv[2])) {
                 abrirRuta((app.isPackaged)?process.argv[1]:process.argv[2]);
@@ -188,6 +191,7 @@ if (!singleLock) {
     })
 
     const abrirRuta = async(ruta) => {
+        console.log(ruta);
         partesRuta = ruta.split("\\");
         ruta = "";
         for (let i = 0; i < partesRuta.length; i++) {
@@ -212,8 +216,11 @@ if (!singleLock) {
                     console.log("El archivo abierto es un directorio");
                     return;
                 }
-                template = await CargadorInformacion.getVideoTemplate(ruta).catch(err => console.log(err));
+                template = (await CargadorInformacion.getVideoTemplate(ruta)).template;
+                Configuracion.guardarCambios();
             }
+            Configuracion.info = template;
+            Configuracion.guardarCambios();
             reproducir(template);
         } catch (e) {
             console.log("Error en el sync");
