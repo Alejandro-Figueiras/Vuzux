@@ -27,7 +27,7 @@ module.exports = class Reproductor {
             icon: "./assets/icon.png"
         });
 
-        this.ventana.toggleDevTools();
+        // this.ventana.toggleDevTools();
 
         this.ventana.loadURL(url.format({
             pathname: path.join(__dirname + "/interfaz/reproductor/reproductor.html"),
