@@ -292,7 +292,8 @@ const uuid = require("uuid").v4;
         </div>`;
         mainContent.innerHTML = html;
     })
-    ipcRenderer.on("agregar-carpetas:finished", (e, datos) => {
+    ipcRenderer.on("agregar-carpeta:finished", (e, datos) => {
+        console.log("Carga finalizada");
         cargando = false;
         configDatos = datos;
         vistaAjustes();

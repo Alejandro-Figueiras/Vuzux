@@ -2,6 +2,9 @@ const Cargador = require("./CargadorConfiguracion");
 
 module.exports = class Configuracion {
 
+    static ffmpegPath = "";
+    static ffprobePath = "";
+
     static datos = {}
 
     static iniciar() {

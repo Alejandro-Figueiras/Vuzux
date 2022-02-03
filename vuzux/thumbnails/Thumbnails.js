@@ -3,7 +3,8 @@ const uuid = require("uuid").v4;
 const fs = require("fs");
 const genThumbnail = require('simple-thumbnail');
 const sharp = require("sharp");
-const sizeOf = require('image-size')
+const sizeOf = require('image-size');
+const Configuracion = require("../configuracion/Configuracion");
 
 module.exports = class Thumbnails {
 
@@ -18,7 +19,7 @@ module.exports = class Thumbnails {
                 if (duracionCustom > 45) duracionCustom = 42;
                 if (duracionCustom) console.log("Duracion Custom:", duracionCustom);
                 console.log(`INFO: Generando thumbnail para ${path} en ${salidaFinal}`);
-                genThumbnail(path, salida, '640x?', {path:'./nativos/ffmpeg.exe', seek:(duracion < 45)?`00:00:${duracionCustom}.00`:"00:00:42.23"})
+                genThumbnail(path, salida, '640x?', {path:Configuracion.ffmpegPath, seek:(duracion < 45)?`00:00:${duracionCustom}.00`:"00:00:42.23"})
                 .then(async() => {
                     const size = await sizeOf(salida);
                     let w, h;

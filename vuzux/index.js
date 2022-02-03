@@ -128,14 +128,10 @@ const instanciarVentanaInicial = () => {
             videos: [],
             subdirectorios: []
         }
+        await Explorador.explorarPersonalizados();
+        await actualizarCarpetas();
         ventanaInicial.webContents.send("agregar-carpeta:finished", Configuracion.datos);
         console.log("Agregado completado");
-        Explorador.explorarPersonalizados().then(() => {
-            ventanaInicial.webContents.send("respuesta:finished", {
-                datos: Configuracion.datos
-            })
-            actualizarCarpetas();
-        })
 
     })
 
@@ -179,6 +175,8 @@ if (!singleLock) {
     // lo normal
     app.on("ready", (e, info) => {
         CargarConfiguracion.ruta = process.env['USERPROFILE']+path.sep+((!app.isPackaged)?".vuzux-dev":".vuzux")+path.sep
+        Configuracion.ffmpegPath = path.join(__dirname,app.isPackaged?"../app.asar.unpacked":"", "nativos/ffmpeg.exe");
+        Configuracion.ffprobePath = path.join(__dirname,app.isPackaged?"../app.asar.unpacked":"", "nativos/ffprobe-static/bin/win32/x64/ffprobe.exe");
         Configuracion.iniciar();
         instanciarVentanaInicial();
 
@@ -206,7 +204,7 @@ if (!singleLock) {
                 if (!status.isDirectory()) {
                     let ext = path.extname(ruta);
                     // EXTENSIONES (revisar el otro lugar donde estan las extensiones)
-                    if (!(ext == ".mp4" || ext == ".mkv"|| ext == ".avi" || ext == ".mpg" || ext == ".m4v" || ext == ".flv")) {
+                    if (!(ext == ".mp4" || ext == ".mkv"|| ext == ".m4v")) {
                         console.log("El archivo no tiene un formato soportado");
                         return;
                     } else {

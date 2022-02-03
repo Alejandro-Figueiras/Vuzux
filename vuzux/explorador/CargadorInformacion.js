@@ -1,6 +1,5 @@
 const fs = require("fs");
 const ffprobe = require("ffprobe");
-const ffprobePath = require("./../nativos/ffprobe-static/index").path;
 const Thumbnails = require("./../thumbnails/Thumbnails");
 const package_path = require("path");
 const Configuracion = require("../configuracion/Configuracion");
@@ -10,7 +9,7 @@ module.exports = class CargadorInformacion {
 
     static getVideoInfo(path) {
         return new Promise((response, reject) => {
-            ffprobe(path, {path: ffprobePath}).then(info => {
+            ffprobe(path, {path: Configuracion.ffprobePath}).then(info => {
                 response(info);
             }).catch(err => reject(err));
         });

@@ -1,17 +1,60 @@
 {
-  "name": "vuzux",
+  "name": "Vuzux",
   "product-name": "Vuzux",
-  "version": "0.0.3",
   "description": "Reproductor y explorador de video que esta todavia tomando codigo en biberon.",
+  "author": "Alejandro",
+  "version": "0.0.4",
   "main": "index.js",
+  "build": {
+    "appId": "xsralejandrox.vuzux",
+    "icon": "assets/icon.ico",
+    "directories": {
+      "output": "../compilated"
+    },
+    "asarUnpack": [
+      "nativos/ffmpeg.exe",
+      "nativos/ffprobe-static/bin/win32/x64/ffprobe.exe"
+    ],
+    "win": {
+      "target": {
+        "target": "nsis",
+        "arch": "x64"
+      }
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true,
+      "uninstallDisplayName": "Vuzux",
+      "createDesktopShortcut": "always",
+      "installerSidebar": "./assets/sidebar-installer.bmp",
+      "uninstallerSidebar": "./assets/sidebar-installer.bmp"
+    },
+    "fileAssociations": [
+      {
+        "ext": "mp4",
+        "description": "MP4 File"
+      },
+      {
+        "ext": "mkv",
+        "description": "MKV File"
+      },
+      {
+        "ext": "m4v",
+        "description": "M4V File"
+      }
+    ]
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron index.js",
-    "build": "electron-packager . \"Vuzux\" --out=./../compilated/ --overwrite --icon=assets/icon.png --version-string.FileDescription=CE --version-string.ProductName=\"Vuzux\"",
-    "package-win": "electron-packager . \"Vuzux\" --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Vuzux\""
+    "pack": "electron-packager . \"Vuzux\" --out=./../compilated/ --overwrite --icon=assets/icon.png --version-string.FileDescription=CE --version-string.ProductName=\"Vuzux\"",
+    "package-win": "electron-packager . \"Vuzux\" --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Vuzux\"",
+
+    "build": "electron-builder --dir",
+    "dist": "electron-builder -w"
   },
   "keywords": [],
-  "author": "Alejandro",
   "license": "ISC",
   "dependencies": {
     "ffprobe": "^1.1.2",
