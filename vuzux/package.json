@@ -3,7 +3,7 @@
   "product-name": "Vuzux",
   "description": "Reproductor y explorador de video que esta todavia tomando codigo en biberon.",
   "author": "Alejandro",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "main": "index.js",
   "build": {
     "appId": "xsralejandrox.vuzux",

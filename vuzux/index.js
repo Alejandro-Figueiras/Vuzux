@@ -88,6 +88,7 @@ const instanciarVentanaInicial = () => {
     ventanaInicial.on("closed", () => {
         Configuracion.guardarCambios();
         app.quit();
+        process.exit(0);
     })
     
     ipcMain.on("start", async(e, obj) => {
