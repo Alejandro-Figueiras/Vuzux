@@ -36,11 +36,19 @@ main {
 
 .interfaz {
     opacity: 0;
-    transition: opacity 1s;
+    transition: opacity 0.75s;
 }
 
 .interfaz-hover {
     opacity: 1;
+}
+
+.cursor-auto {
+    cursor: auto !important;
+}
+
+.cursor-none {
+    cursor: none !important;
 }
 
 .controles {
