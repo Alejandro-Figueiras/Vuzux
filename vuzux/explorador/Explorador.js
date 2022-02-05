@@ -34,7 +34,8 @@ module.exports = class Explorador {
                         directorios.push(plantilla)
                     } else {
                         let ext = path.extname(rutaFile);
-                        if (!(ext == ".mp4" || ext == ".mkv"|| ext == ".avi" || ext == ".mpg" || ext == ".m4v" || ext == ".flv")) continue;
+                        // EXTENSIONES (revisar el otro lugar donde estan las extensiones)
+                        if (!(ext == ".mp4" || ext == ".mkv"|| ext == ".m4v")) continue;
                         if (status.size < 1024) continue;
                         let plantilla = {
                             ruta: rutaFile,

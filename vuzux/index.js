@@ -7,6 +7,9 @@ const fs = require("fs");
 const CargadorInformacion = require("./explorador/CargadorInformacion");
 const Reproductor = require("./Reproductor");
 const CargarConfiguracion = require("./configuracion/CargadorConfiguracion");
+const fluent_ffmpeg = require("fluent-ffmpeg")
+const Convertidor = require("./formatos/Convertidor");
+const { ffmpegPath, ffprobePath } = require("./configuracion/Configuracion");
 
 let ventanaInicial, reproductor;
 
@@ -174,11 +177,14 @@ if (!singleLock) {
     })
 
     // lo normal
-    app.on("ready", (e, info) => {
+    app.on("ready", async(e, info) => {
         CargarConfiguracion.ruta = process.env['USERPROFILE']+path.sep+((!app.isPackaged)?".vuzux-dev":".vuzux")+path.sep
         Configuracion.ffmpegPath = path.join(__dirname,app.isPackaged?"../app.asar.unpacked":"", "nativos/ffmpeg.exe");
         Configuracion.ffprobePath = path.join(__dirname,app.isPackaged?"../app.asar.unpacked":"", "nativos/ffprobe-static/bin/win32/x64/ffprobe.exe");
+        fluent_ffmpeg.setFfmpegPath(Configuracion.ffmpegPath);
+        fluent_ffmpeg.setFfprobePath(Configuracion.ffprobePath);
         Configuracion.iniciar();
+
         instanciarVentanaInicial();
 
         Configuracion.datos.argv = process.argv;
@@ -227,3 +233,21 @@ if (!singleLock) {
         }
     }
 }
+
+/* 
+const baseFlags = ["-pix_fmt", "yuv420p", "-movflags", "+faststart"]
+  const ext = path.extname(videoFile)
+  const name = path.basename(videoFile, ext)
+  const savePath = path.join(app.getAppPath(), `../assets/videos/${name}.mp4`)
+  if (!fs.existsSync(path.dirname(savePath))) fs.mkdirSync(path.dirname(savePath), {recursive: true})
+  if (fs.existsSync(savePath)) return savePath
+  await new Promise<void>((resolve) => {
+    ffmpeg(videoFile)
+    .outputOptions([...baseFlags, "-vcodec", "libx264", "-preset", "ultrafast", "-crf", "16", "-acodec", "copy"])
+    .save(savePath)
+    .on("end", () => {
+        resolve()
+    })
+  })
+  return savePath
+*/
