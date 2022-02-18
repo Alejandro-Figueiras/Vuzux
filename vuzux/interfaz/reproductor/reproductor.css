@@ -32,6 +32,11 @@ main {
     margin: auto;
     margin-bottom: 0px;
     padding-bottom: 0;
+    display: none;
+}
+
+.video-active {
+    display: block;
 }
 
 .interfaz {

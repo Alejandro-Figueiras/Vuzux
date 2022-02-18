@@ -3,8 +3,13 @@ ipcRenderer.send("repro:listo", {});
 ipcRenderer.on("repro:start", (e, template = {}) => {
     console.log("inicio");
     informacion = template;
-    video.src = template.ruta;
+    // video.src = template.ruta;
+    video.src = sources[0];
     video.load();
+
+    // esto arreglar
+    videoB.src = sources[1];
+    videoB.load();
     
     tieneHoras = (parseInt(template.duracion/3600%60))?true:false;
 
@@ -30,3 +35,4 @@ ipcRenderer.on("repro:close", (e, datos) => {
     btnPlay.src = iconos.play;
     video.load();
 })
+

@@ -10,6 +10,7 @@ const CargarConfiguracion = require("./configuracion/CargadorConfiguracion");
 const fluent_ffmpeg = require("fluent-ffmpeg")
 const Convertidor = require("./formatos/Convertidor");
 const { ffmpegPath, ffprobePath } = require("./configuracion/Configuracion");
+const DivisorArchivos = require("./formatos/DivisorArchivos");
 
 let ventanaInicial, reproductor;
 
@@ -185,6 +186,11 @@ if (!singleLock) {
         fluent_ffmpeg.setFfprobePath(Configuracion.ffprobePath);
         Configuracion.iniciar();
 
+        // console.log("inicio");
+        
+        // console.log(await DivisorArchivos.dividirVideo("A:/Usuario/Desktop/Vuzux/''Obelisk'' 100% (XXL Demon) by SuprianGD   Geometry Dash [2.11].mov"));
+        // console.log("finalizado");
+
         instanciarVentanaInicial();
 
         Configuracion.datos.argv = process.argv;
@@ -233,21 +239,3 @@ if (!singleLock) {
         }
     }
 }
-
-/* 
-const baseFlags = ["-pix_fmt", "yuv420p", "-movflags", "+faststart"]
-  const ext = path.extname(videoFile)
-  const name = path.basename(videoFile, ext)
-  const savePath = path.join(app.getAppPath(), `../assets/videos/${name}.mp4`)
-  if (!fs.existsSync(path.dirname(savePath))) fs.mkdirSync(path.dirname(savePath), {recursive: true})
-  if (fs.existsSync(savePath)) return savePath
-  await new Promise<void>((resolve) => {
-    ffmpeg(videoFile)
-    .outputOptions([...baseFlags, "-vcodec", "libx264", "-preset", "ultrafast", "-crf", "16", "-acodec", "copy"])
-    .save(savePath)
-    .on("end", () => {
-        resolve()
-    })
-  })
-  return savePath
-*/

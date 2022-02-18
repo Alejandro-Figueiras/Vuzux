@@ -22,7 +22,8 @@
     <!-- Main -->
     <main id="mainContent">
         <div class="reproductor">
-			<video class="video w-100 h-100" id="video" src="./../black.mp4"></video>
+			<video class="video w-100 h-100 video-active" id="videoA" src="./../black.mp4"></video>
+			<video class="video w-100 h-100" id="videoB" src="./../black.mp4"></video>
 
 			<div class="interfaz" id="interfaz">
 
@@ -55,7 +56,12 @@
         </div>
     </main>
     <div id="elementos-static"></div>
-    <div id="elementos-hidden" class="d-none; visually-hidden"></div>
+    <div id="elementos-hidden" class="d-none; visually-hidden">
+		<div id="videos-cache">
+
+		</div>
+		<video id="video-hidden" muted autoplay></video>
+	</div>
 
 	<script src="../libs/jquery.js"></script>
     <script src="../libs/bootstrap.bundle.js"></script>

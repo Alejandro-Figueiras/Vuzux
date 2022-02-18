@@ -10,21 +10,22 @@ const togglePausa = () => {
     }
 }
 
-const retroceder = (segs = 10) => {
+const retroceder = (segs = 10) => { // TODO arreglar, y tambien retroceder()
     video.currentTime = parseInt((video.currentTime - segs < 0)?0:(video.currentTime - segs));
     actualizacion = true;
-    if (informacion.visto < video.currentTime) informacion.visto = video.currentTime;
+    if (informacion.visto < (video.currentTime + (pos * spf))) informacion.visto = video.currentTime + (pos * spf);
     actualizarInformacion();
 }
 
 const adelantar = (segs = 10) => {
     video.currentTime = parseInt((video.currentTime + segs > informacion.duracion)? informacion.duracion :(video.currentTime + segs));
     actualizacion = true;
+    if (informacion.visto < (video.currentTime + (pos * spf))) informacion.visto = video.currentTime + (pos * spf);
     actualizarInformacion();
 }
 
 const reiniciar = () => {
-    video.currentTime = 0;
+    video.currentTime = 0; // TODO arreglar
     actualizacion = true;
     actualizarInformacion();
 }
@@ -78,10 +79,12 @@ const mutear = () => {
     }
 }
 
-video.addEventListener("volumechange", e => {
+const volumechangeEvent = e => {
     volumenBar.value = parseInt(video.volume * 100);
     actualizarBotonVolumen(parseInt(video.volume * 100));
-})
+}
+videoA.addEventListener("volumechange", volumechangeEvent)
+videoB.addEventListener("volumechange", volumechangeEvent)
 
 volumenBar.addEventListener("input", () => {
     video.volume = volumenBar.value / 100;
@@ -92,20 +95,23 @@ volumenBar.addEventListener("input", () => {
 /* ------ Progress Bar ------ */
 let ultimoBar = 0;
 
-video.addEventListener("timeupdate", e => {
+const timeupdateEvent = e => {
     if (!actualizacion) if (progressBar.value != ultimoBar) return;
-    progressBar.value = parseInt(video.currentTime);
-    ultimoBar = parseInt(video.currentTime);
-    duracionActual.textContent = parseTime(parseInt(video.currentTime));
-})
+    console.log(video.currentTime);
+    progressBar.value = parseInt(video.currentTime + (pos * spf));
+    ultimoBar = parseInt(video.currentTime + (pos * spf));
+    duracionActual.textContent = parseTime(parseInt(video.currentTime + (pos * spf)));
+}
+videoA.addEventListener("timeupdate", timeupdateEvent);
+videoB.addEventListener("timeupdate", timeupdateEvent);
 
 progressBar.addEventListener("input", () => {
     ultimoBar = progressBar.value;
-    video.currentTime = progressBar.value;
+    video.currentTime = progressBar.value - (pos * spf);
     duracionActual.textContent = parseTime(progressBar.value);
 
     // Actualizar informacion
-    if (informacion.visto < video.currentTime) informacion.visto = video.currentTime;
+    if (informacion.visto < (video.currentTime + (pos * spf))) informacion.visto = video.currentTime + (pos * spf);
     actualizarInformacion();
 })
 
