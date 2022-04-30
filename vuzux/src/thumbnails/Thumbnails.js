@@ -43,16 +43,16 @@ module.exports = class Thumbnails {
                     .catch(err => {
                         fs.unlinkSync(salida);
                         console.log(`ERROR: ${err}`);
-                        resolve("minatura.png");
+                        resolve("../assets/interfaz/miniatura.png");
                         reject(err);
                     });
                 })
                 .catch(err => {
-                    resolve("minatura.png")
+                    resolve("../assets/interfaz/miniatura.png")
                     reject(err);
                 })
             } catch (e) {
-                resolve("miniatura.png");
+                resolve("../assets/interfaz/miniatura.png");
             }
         });
         

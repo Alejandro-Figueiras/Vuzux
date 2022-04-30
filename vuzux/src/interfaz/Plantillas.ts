@@ -1,5 +1,6 @@
-const Explorador = require("./../explorador/Explorador");
-class Plantillas {
+import { Explorador } from "./../explorador/Explorador";
+
+export class Plantillas {
     static getTablaUnidad(id = "") {
         return `<table class="table table-dark" id="tabla${id}">
         <thead>

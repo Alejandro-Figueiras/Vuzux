@@ -1,11 +1,13 @@
-const { BrowserWindow, ipcMain } = require("electron");
+import { BrowserWindow, ipcMain } from "electron";
 const url = require('url');
 const path = require('path');
 const Configuracion = require("./configuracion/Configuracion");
 const CargadorInformacion = require("./explorador/CargadorInformacion");
 
 
-module.exports = class Reproductor {
+export class Reproductor {
+    ventana: BrowserWindow;
+    listo = false;
 
     constructor(template = {ruta: "", nombre: 0, ext: 0, width: 0, height: 0, duracion: 0, visto: 0, size: 0, thumbnail: 0}, cb) {
         this.ventana = new BrowserWindow({
@@ -30,7 +32,7 @@ module.exports = class Reproductor {
         this.ventana.toggleDevTools();
 
         this.ventana.loadURL(url.format({
-            pathname: path.join(__dirname + "/interfaz/reproductor/reproductor.html"),
+            pathname: path.join(__dirname + "/../views/reproductor/reproductor.html"),
             protocol: "file",
             slashes: true,
         }));

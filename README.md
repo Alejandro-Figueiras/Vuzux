@@ -11,5 +11,6 @@ Con explorador de directorios personalizado.
 ## Principales herramientas en el desarrollo
 * NodeJS
 * Javascript V8 (de NodeJS)
+* TypeScript
 * Electron.js
 * Bootstrap 5

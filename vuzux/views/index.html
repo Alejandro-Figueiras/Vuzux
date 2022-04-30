@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vuzux</title>
-    <link rel="stylesheet" href="libs/bootstrap.css">
+    <link rel="stylesheet" href="../libs/bootstrap.css">
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/index.css">
     <link rel="manifest" href="manifiesto.webmanifest">
@@ -42,7 +42,7 @@
     <main class="pt-3" id="mainContent">
         <div class="m-0 row justify-content-center align-items-center" style="height: 100% !important;">
             <div class="col">
-                <img src="img/cargando.gif" width="40px" height="40px" class="d-block m-auto align-content-center">
+                <img src="../assets/interfaz/cargando.gif" width="40px" height="40px" class="d-block m-auto align-content-center">
                 <p class="text-light mt-2" style="font-size: 18px; text-align: center;">Cargando...<br/>
                     Si es tu primera vez o haz agregado muchos videos recientemente<br/>esto puede demorar algunos minutos. Ten paciencia</p>
             </div>
@@ -51,9 +51,9 @@
     <div id="elementos-static"></div>
     <div id="elementos-hidden" class="d-none; visually-hidden"></div>
 
-	<script src="libs/jquery.js"></script>
-    <script src="libs/bootstrap.bundle.js"></script>
-    <script src="Plantillas.js"></script>
-    <script src="interfaz_index.js"></script>
+	<script src="../libs/jquery.js"></script>
+    <script src="../libs/bootstrap.bundle.js"></script>
+    <script>let exports = {};</script>
+    <script src="../dist/interfaz/interfaz_index.js"></script>
 </body>
 </html>

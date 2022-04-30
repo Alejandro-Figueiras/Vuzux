@@ -4,8 +4,7 @@ const path = require("path");
 const Configuracion = require("../configuracion/Configuracion");
 const CargadorInformacion = require("./CargadorInformacion");
     
-
-module.exports = class Explorador {
+export class Explorador {
 
     static ignore = {
         "C:/ProgramData":"C:/ProgramData",
