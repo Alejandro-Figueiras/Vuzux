@@ -1,5 +1,7 @@
-const { ipcRenderer } = require("electron");
+import { ipcRenderer } from "electron";
 const uuid = require("uuid").v4;
+
+import { Plantillas } from "../dist/interfaz/Plantillas";
 
 (() => {
     let discosRevisar = [];
@@ -55,7 +57,7 @@ const uuid = require("uuid").v4;
     const vistaCargando = () => {
         let html = `<div class="m-0 row justify-content-center align-items-center" style="height: 100% !important;">
             <div class="col">
-                <img src="img/cargando.gif" width="40px" height="40px" class="d-block m-auto align-content-center">
+                <img src="../assets/interfaz/cargando.gif" width="40px" height="40px" class="d-block m-auto align-content-center">
                 <p class="text-light mt-2" style="font-size: 18px; text-align: center;">Cargando...</p>
             </div>
         </div>`
@@ -102,13 +104,13 @@ const uuid = require("uuid").v4;
         let nombre = carpeta.path.split("/").reverse()[(carpeta.path.charAt(carpeta.path.length - 1) == '/')?1:0];
         let html = `<div class="offcanvas offcanvas-top vh-100 bg-dark text-light" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
             <div class="offcanvas-header">
-                <h5 id="offcanvasTopLabel"><a href="#" class="text-light text-underline-none nonDraggable" data-bs-dismiss="offcanvas" aria-label="Close"><img src="img/atras.svg" style="height:100%"></a>  ${nombre}</h5>
+                <h5 id="offcanvasTopLabel"><a href="#" class="text-light text-underline-none nonDraggable" data-bs-dismiss="offcanvas" aria-label="Close"><img src="../assets/interfaz/atras.svg" style="height:100%"></a>  ${nombre}</h5>
             </div>
             <div class="offcanvas-body" id="offcanvasTopBody">
             
                 <div id="offcanvasCargando" class="m-0 row justify-content-center align-items-center" style="height: 100% !important;">
                     <div class="col">
-                        <img src="img/cargando.gif" width="40px" height="40px" class="d-block m-auto align-content-center">
+                        <img src="../assets/interfaz/cargando.gif" width="40px" height="40px" class="d-block m-auto align-content-center">
                         <p class="text-light mt-2" style="font-size: 18px; text-align: center;">Cargando informacion...</p>
                     </div>
                 </div>
@@ -232,7 +234,7 @@ const uuid = require("uuid").v4;
             <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Toggle top offcanvas</button>
             <div class="offcanvas offcanvas-top vh-100 bg-dark text-light" tabindex="-1" id="offcanvasFavoritos" aria-labelledby="offcanvasFavoritosLabel">
                 <div class="offcanvas-header">
-                    <h5 id="offcanvasFavoritosLabel"><a href="#" class="text-light text-underline-none nonDraggable" data-bs-dismiss="offcanvas" aria-label="Close"><img src="img/atras.svg" style="height:100%"></a>  Peliculas Favoritas</h5>
+                    <h5 id="offcanvasFavoritosLabel"><a href="#" class="text-light text-underline-none nonDraggable" data-bs-dismiss="offcanvas" aria-label="Close"><img src="../assets/interfaz/atras.svg" style="height:100%"></a>  Peliculas Favoritas</h5>
                 </div>
                 <div class="offcanvas-body" id="offcanvasFavoritosBody">
                     <div class="row row-cols-md-5 row-cols-lg-6 row-cols-xl-7" id="offcanvas-row">
@@ -285,7 +287,7 @@ const uuid = require("uuid").v4;
         cargando = true;
         let html = `<div class="m-0 row justify-content-center align-items-center" style="height: 100% !important;">
             <div class="col">
-                <img src="img/cargando.gif" width="40px" height="40px" class="d-block m-auto align-content-center">
+                <img src="../assets/interfaz/cargando.gif" width="40px" height="40px" class="d-block m-auto align-content-center">
                 <p class="text-light mt-2" style="font-size: 18px; text-align: center;">Cargando...<br/>
                     Obteniendo informacion y generando miniaturas<br/>Esto puede demorar algunos minutos. Ten paciencia</p>
             </div>

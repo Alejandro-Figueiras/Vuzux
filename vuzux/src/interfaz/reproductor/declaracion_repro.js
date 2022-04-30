@@ -4,13 +4,13 @@ const video = document.getElementById("video"); // video en el html
 let informacion = {}; // la template donde esta la info del video
 let tieneHoras = false; // esto es si tiene horas para en el parseTime evitar poner 00
 const iconos = {
-    play: "icons/play.png",
-    pausa: "icons/pausa.png",
-    fullscreen: "icons/fullscreen.png",
-    windowed: "icons/windowed.png",
-    vol0: "icons/volumen-0.png",
-    vol1: "icons/volumen-1.png",
-    vol2: "icons/volumen-2.png"
+    play: "../../assets/player-icons/play.png",
+    pausa: "../../assets/player-icons/pausa.png",
+    fullscreen: "../../assets/player-icons/fullscreen.png",
+    windowed: "../../assets/player-icons/windowed.png",
+    vol0: "../../assets/player-icons/volumen-0.png",
+    vol1: "../../assets/player-icons/volumen-1.png",
+    vol2: "../../assets/player-icons/volumen-2.png"
 }
 const btnPlay = document.getElementById("btn-play");
 const btnRetroceder = document.getElementById("btn-retroceder");

@@ -1,17 +1,18 @@
-const { app, BrowserWindow, Menu, ipcMain, globalShortcut} = require("electron");
-const url = require("url");
+import { BrowserWindow, app, Menu, ipcMain, globalShortcut } from "electron";
+import { Reproductor } from "./Reproductor";
+import { Explorador } from "./explorador/Explorador";
+import url from "url";
+
 const path = require("path");
 const Configuracion = require("./configuracion/Configuracion");
-const Explorador = require("./explorador/Explorador");
 const fs = require("fs");
 const CargadorInformacion = require("./explorador/CargadorInformacion");
-const Reproductor = require("./Reproductor");
 const CargarConfiguracion = require("./configuracion/CargadorConfiguracion");
 const fluent_ffmpeg = require("fluent-ffmpeg")
 const Convertidor = require("./formatos/Convertidor");
 const { ffmpegPath, ffprobePath } = require("./configuracion/Configuracion");
 
-let ventanaInicial, reproductor;
+let ventanaInicial:BrowserWindow, reproductor:Reproductor;
 
 const iniciar = async() => {
     await Explorador.explorarPersonalizados();
@@ -50,7 +51,7 @@ const actualizarCarpetas = async() => {
         ventanaInicial.webContents.send("respuesta:finished", {
             datos: Configuracion.datos
         })
-        resolve();
+        resolve(true);
     })
 }
 
@@ -75,7 +76,7 @@ const instanciarVentanaInicial = () => {
     
     
     ventanaInicial.loadURL(url.format({
-        pathname: path.join(__dirname + "/interfaz/index.html"),
+        pathname: path.join(__dirname + "/../views/index.html"),
         protocol: "file",
         slashes: true,
     }));
@@ -149,7 +150,7 @@ const instanciarVentanaInicial = () => {
     
 }
 
-const reproducir = (template) => {
+const reproducir = (template:any) => {
     console.log("A reproducir");
     if (reproductor == null) reproductor = new Reproductor(template, () => {
         ventanaInicial.webContents.send("respuesta:finished", {
@@ -179,8 +180,8 @@ if (!singleLock) {
     // lo normal
     app.on("ready", async(e, info) => {
         CargarConfiguracion.ruta = process.env['USERPROFILE']+path.sep+((!app.isPackaged)?".vuzux-dev":".vuzux")+path.sep
-        Configuracion.ffmpegPath = path.join(__dirname,app.isPackaged?"../app.asar.unpacked":"", "nativos/ffmpeg.exe");
-        Configuracion.ffprobePath = path.join(__dirname,app.isPackaged?"../app.asar.unpacked":"", "nativos/ffprobe-static/bin/win32/x64/ffprobe.exe");
+        Configuracion.ffmpegPath = path.join(__dirname,app.isPackaged?"../app.asar.unpacked":"", "../nativos/ffmpeg.exe");
+        Configuracion.ffprobePath = path.join(__dirname,app.isPackaged?"../app.asar.unpacked":"", "../nativos/ffprobe-static/bin/win32/x64/ffprobe.exe");
         fluent_ffmpeg.setFfmpegPath(Configuracion.ffmpegPath);
         fluent_ffmpeg.setFfprobePath(Configuracion.ffprobePath);
         Configuracion.iniciar();
@@ -197,7 +198,7 @@ if (!singleLock) {
 
     const abrirRuta = async(ruta) => {
         console.log(ruta);
-        partesRuta = ruta.split("\\");
+        let partesRuta = ruta.split("\\");
         ruta = "";
         for (let i = 0; i < partesRuta.length; i++) {
             if (i != 0) ruta += "/";
@@ -233,21 +234,3 @@ if (!singleLock) {
         }
     }
 }
-
-/* 
-const baseFlags = ["-pix_fmt", "yuv420p", "-movflags", "+faststart"]
-  const ext = path.extname(videoFile)
-  const name = path.basename(videoFile, ext)
-  const savePath = path.join(app.getAppPath(), `../assets/videos/${name}.mp4`)
-  if (!fs.existsSync(path.dirname(savePath))) fs.mkdirSync(path.dirname(savePath), {recursive: true})
-  if (fs.existsSync(savePath)) return savePath
-  await new Promise<void>((resolve) => {
-    ffmpeg(videoFile)
-    .outputOptions([...baseFlags, "-vcodec", "libx264", "-preset", "ultrafast", "-crf", "16", "-acodec", "copy"])
-    .save(savePath)
-    .on("end", () => {
-        resolve()
-    })
-  })
-  return savePath
-*/
